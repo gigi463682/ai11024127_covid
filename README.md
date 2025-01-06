@@ -54,18 +54,18 @@ __處理缺失值__
 missing_vals = train_df.isnull().sum()
 missing_vals.plot(kind = 'bar')
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/4_28248c5.png)
 
 ```
 train_df.dropna(how = 'all')
 train_df.isnull().sum()
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/5_74441c6.png)
 ```
 train_df.fillna('unknown', inplace=True)
 train_df.isnull().sum()
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/6_59046c7.png)
 ```
 train_data = train_df[train_df['Dataset_type'] == 'TRAIN']
 test_data = train_df[train_df['Dataset_type'] == 'TEST']
