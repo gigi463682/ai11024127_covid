@@ -13,6 +13,7 @@
 
 >本文，將使用深度學習和遷移學習對受 Covid-19 影響的肺部的 X 光影像進行分類和識別。
 __導入庫和載入數據__
+
 '''
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -41,6 +42,7 @@ from sklearn.utils import shuffle
 train_df = pd.read_csv('../input/coronahack-chest-xraydataset/Chest_xray_Corona_Metadata.csv')
 train_df.shape
 '''
+
 > (5910, 6)
 
 '''train_df.head(5)'''
