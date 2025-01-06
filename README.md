@@ -74,9 +74,9 @@ print(f"Shape of train data : {train_data.shape}")
 print(f"Shape of test data : {test_data.shape}")
 test_data.sample(10)
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/7_48628c8.png)
 
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/8_33135c9.png)
 
 __我們將用「unknown」填滿缺失值。__
 
@@ -85,7 +85,7 @@ print((train_df['Label_1_Virus_category']).value_counts())
 print('--------------------------')
 print((train_df['Label_2_Virus_category']).value_counts())
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/9_77707c10.png)
 
 >因此，標籤 2 類別包含 COVID-19 病例！
 
@@ -108,7 +108,7 @@ for iterator, filename in enumerate(sample_train_images):
 
 plt.tight_layout()
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/10_30692c11.png)
 
 __視覺化__
 
@@ -116,7 +116,7 @@ __視覺化__
 plt.figure(figsize=(15,10))
 sns.countplot(train_data['Label_2_Virus_category']);
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/11_15174c13.png)
 
 __對於 COVID-19 病例__
 ```
@@ -139,7 +139,7 @@ for row, file in enumerate(sample_covid_path):
 fig.suptitle('Label 2 Virus Category = COVID-19', size=16)
 plt.show()
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/12_92007c12.png)
 
 __對於正常情況__
 
