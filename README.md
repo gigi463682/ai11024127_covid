@@ -75,6 +75,7 @@ print(f"Shape of test data : {test_data.shape}")
 test_data.sample(10)
 ```
 ![image]()
+
 ![image]()
 
 __我們將用「unknown」填滿缺失值。__
@@ -85,6 +86,7 @@ print('--------------------------')
 print((train_df['Label_2_Virus_category']).value_counts())
 ```
 ![image]()
+
 >因此，標籤 2 類別包含 COVID-19 病例！
 
 __顯示影像__
@@ -107,6 +109,7 @@ for iterator, filename in enumerate(sample_train_images):
 plt.tight_layout()
 ```
 ![image]()
+
 __視覺化__
 
 ```
@@ -161,6 +164,7 @@ fig.suptitle('Label = NORMAL', size=16)
 plt.show()
 ```
 ![image]()
+
 ```
 final_train_data = train_data[(train_data['Label'] == 'Normal') | 
                               ((train_data['Label'] == 'Pnemonia') &
@@ -175,6 +179,7 @@ final_test_data = test_data[['X_ray_image_name', 'class', 'target']]
 test_data['Label'].value_counts()
 ```
 ![image]()
+
 __數據增強__
 
 ```
@@ -210,6 +215,7 @@ for batch in datagen.flow(tf.expand_dims(samp_img,0), batch_size=6):
 plt.show();
 ```
 ![image]()
+
 ```
 corona_df = final_train_data[final_train_data['Label_2_Virus_category'] == 'COVID-19']
 with_corona_augmented = []
@@ -239,6 +245,7 @@ print(len(train_arrays))
 print(len(test_arrays))
 ```
 ![image]()
+
 ```
 y_train = np.concatenate((np.int64(final_train_data['target'].values), np.ones(len(with_corona_augmented), dtype=np.int64)))
 ```
@@ -256,6 +263,7 @@ for i,l in train_dataset.take(1):
     plt.imshow(i);
 ```
 ![image]()
+
 __產生批次__
 
 ```
@@ -285,6 +293,7 @@ base_model = tf.keras.applications.ResNet50(input_shape= INPUT_SHAPE,
 base_model.trainable = False
 ```
 ![image]()
+
 ```
 for i,l in train_batches.take(1):
     pass
@@ -303,6 +312,7 @@ model.add(Layers.Dense(1, activation = 'sigmoid'))
 model.summary()
 ```
 ![image]()
+
 ```
 callbacks = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=2)
 
@@ -325,6 +335,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 print(classification_report(test_data['target'], pred.flatten()))
 ```
 ![image]()
+
 >我們將繪製一個混淆矩陣來視覺化模型的表現：
 
 ```
