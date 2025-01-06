@@ -144,7 +144,7 @@ for row, file in enumerate(sample_covid_path):
 fig.suptitle('Label 2 Virus Category = COVID-19', size=16)
 plt.show()
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/13_68416c14.png)
 
 __對於正常情況__
 
@@ -168,7 +168,7 @@ for row, file in enumerate(sample_normal_path):
 fig.suptitle('Label = NORMAL', size=16)
 plt.show()
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/14_92450c15.png)
 
 ```
 final_train_data = train_data[(train_data['Label'] == 'Normal') | 
@@ -183,7 +183,7 @@ final_train_data = final_train_data[['X_ray_image_name', 'class', 'target', 'Lab
 final_test_data = test_data[['X_ray_image_name', 'class', 'target']]
 test_data['Label'].value_counts()
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/15_94427c16.png)
 
 __數據增強__
 
@@ -219,7 +219,7 @@ for batch in datagen.flow(tf.expand_dims(samp_img,0), batch_size=6):
     
 plt.show();
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/16_69581c17.png)
 
 ```
 corona_df = final_train_data[final_train_data['Label_2_Virus_category'] == 'COVID-19']
@@ -239,7 +239,7 @@ def augment(name):
 corona_df['X_ray_image_name'].apply(augment)
 ```
 >注意：輸出太長，無法包含在文章中。這是其中的一小部分。
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/17_93309c18.png)
 
 ```
 train_arrays = [] 
@@ -249,7 +249,7 @@ final_test_data['X_ray_image_name'].apply(lambda x: test_arrays.append(read_img(
 print(len(train_arrays))
 print(len(test_arrays))
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/18_61061c19.png)
 
 ```
 y_train = np.concatenate((np.int64(final_train_data['target'].values), np.ones(len(with_corona_augmented), dtype=np.int64)))
@@ -267,7 +267,7 @@ test_dataset = tf.data.Dataset.from_tensor_slices((test_tensors, y_test_tensor))
 for i,l in train_dataset.take(1):
     plt.imshow(i);
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/19_85171c20.png)
 
 __產生批次__
 
@@ -283,7 +283,7 @@ for i,l in train_batches.take(1):
 for i,l in test_batches.take(1):
     print('Test Shape per Batch: ',i.shape);
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/20_95822c21.png)
 
 __使用 ResNet50 進行遷移學習__
 
@@ -297,7 +297,7 @@ base_model = tf.keras.applications.ResNet50(input_shape= INPUT_SHAPE,
 # We set it to False because we don't want to mess with the pretrained weights of the model.
 base_model.trainable = False
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/21_32129c22.png)
 
 ```
 for i,l in train_batches.take(1):
@@ -316,7 +316,7 @@ model.add(Layers.Dropout(0.2))
 model.add(Layers.Dense(1, activation = 'sigmoid'))
 model.summary()
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/22_91381c23.png)
 
 ```
 callbacks = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=2)
@@ -331,7 +331,7 @@ __預測__
 ```
 model.fit(train_batches, epochs=10, validation_data=test_batches, callbacks=[callbacks])
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/23_29442c24.png)
 
 ```
 pred = model.predict_classes(np.array(test_arrays))
@@ -339,7 +339,7 @@ pred = model.predict_classes(np.array(test_arrays))
 from sklearn.metrics import classification_report, confusion_matrix
 print(classification_report(test_data['target'], pred.flatten()))
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/24_11144c25.png)
 
 >我們將繪製一個混淆矩陣來視覺化模型的表現：
 
@@ -352,4 +352,4 @@ sns.heatmap(con_mat, cmap='cividis',
             xticklabels=['Negative', 'Positive'],
             annot=True);
 ```
-![image]()
+![image](https://github.com/gigi463682/ai11024127_covid/blob/main/JGP/25_36341c26.png)
